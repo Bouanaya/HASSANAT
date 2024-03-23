@@ -48,13 +48,13 @@ const dataLoaded = ref(false);
 
 
 onMounted(() => {
-  watch(data, () => {
+watch(data, () => {
    
-    quran.value = Qur.value.filter((item) =>
-      item.englishName.toLowerCase().includes(data.value.toLowerCase())
+   quran.value = Qur.value.filter((item) =>
+    item.englishName.toLowerCase().includes(data.value.toLowerCase())
       
-    );
-  });
+  );
+});
 
 
 }),
