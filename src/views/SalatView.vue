@@ -1,19 +1,61 @@
 <template>
     <div class="w-full h-full bg-primary-400 md:pl-16">
-        <div class="w-full h-full grid grid-cols-2">
+        <div class="w-full h-full grid grid-cols-2 ">
             <Times />
             <div class="relative">
-                <SearCh></SearCh>
-                <div class=" grid grid-cols-3 px-5 gap-6 py-6 mt-20  ">
-                    <button
-                        class="bg-[#0F172A] h-20 flex flex-col justify-center items-center text-primary-50 rounded-lg duration-500  hover:shadow-lg hover:shadow-[#0f172a] "
-                        v-for="(item, index) in 15" :key="index" @click="show">
-
-                        <h1>Skhirat</h1>
-                        <h1 class="font-mono">ٱلْفَاتِحَ</h1>
-                    </button>
+                <!--                        SELECT                  -->
+                <div class="card flex flex-col justify-center items-center h-full space-y-8 ">
+                    <Dropdown v-model="selectedCountry" :options="countries" optionLabel="name"
+                        placeholder="Select a Country" class="w-full md:w-[14rem] mt-4">
+                        <template #value="slotProps">
+                            <div v-if="slotProps.value" class="flex items-center">
+                                <img :alt="slotProps.value.label"
+                                    src="https://primefaces.org/cdn/primevue/images/flag/flag_placeholder.png"
+                                    :class="`mr-2 flag flag-${slotProps.value.code.toLowerCase()}`"
+                                    style="width: 20px; height: 13.4px" />
+                                <div>{{ slotProps.value.name }}</div>
+                            </div>
+                            <span v-else>
+                                {{ slotProps.placeholder }}
+                            </span>
+                        </template>
+                        <template #option="slotProps">
+                            <div class="flex items-center">
+                                <img :alt="slotProps.option.label"
+                                    src="https://primefaces.org/cdn/primevue/images/flag/flag_maroc.png"
+                                    :class="`mr-2 flag flag-${slotProps.option.code.toLowerCase()}`"
+                                    style="width: 20px; height: 13.4px" />
+                                <div>{{ slotProps.option.name }}</div>
+                            </div>
+                        </template>
+                    </Dropdown>
+                    <Dropdown v-model="selectedCountry" :options="countries" optionLabel="name"
+                        placeholder="Select a Country" class="w-full md:w-[14rem] mt-4">
+                        <template #value="slotProps">
+                            <div v-if="slotProps.value" class="flex items-center">
+                                <img :alt="slotProps.value.label"
+                                    src="https://primefaces.org/cdn/primevue/images/flag/flag_placeholder.png"
+                                    :class="`mr-2 flag flag-${slotProps.value.code.toLowerCase()}`"
+                                    style="width: 20px; height: 13.4px" />
+                                <div>{{ slotProps.value.name }}</div>
+                            </div>
+                            <span v-else>
+                                {{ slotProps.placeholder }}
+                            </span>
+                        </template>
+                        <template #option="slotProps">
+                            <div class="flex items-center">
+                                <img :alt="slotProps.option.label"
+                                    src="https://primefaces.org/cdn/primevue/images/flag/flag_maroc.png"
+                                    :class="`mr-2 flag flag-${slotProps.option.code.toLowerCase()}`"
+                                    style="width: 20px; height: 13.4px" />
+                                <div>{{ slotProps.option.name }}</div>
+                            </div>
+                        </template>
+                    </Dropdown>
+                    <Botton label="Secondary" severity="secondary" icon="pi pi-check" />
                 </div>
-                <div v-if="showTime" class="w-full h-full absolute top-0 bg-[#0f172a] border-l-2 border-primary-50">
+                <div v-if="showTime" class="w-full h-full absolute top-0 bg-primary-400 text-[#0F172A] ">
                     <div class="">
                         <button class="p-2 " @click="showTime = false">
                             <ReteRn />
@@ -23,7 +65,7 @@
                         <Carousel>
                             <Slide v-for="slide in 3" :key="slide.count">
                                 <div class="mx-4 p-4 absolute w-3/4 ">
-                                    <h1 class="text-primary-400 text-center cursor-pointer text-2xl  ">
+                                    <h1 class=" text-center cursor-pointer text-2xl  ">
                                         <h1>
                                             13 رمضان, 1445
                                             هـ
@@ -42,8 +84,11 @@
                     </div>
                     <div class="w-full px-8 mt-8 space-y-8 pt-6">
                         <div class="grid grid-cols-2 gap-4" v-for="(item, index) in 6" :key="index">
-                            <div class="bg-primary-400 h-10 flex justify-center items-center rounded-md &">fajer</div>
-                            <div class="bg-primary-60 flex justify-center items-center rounded-md">04:59</div>
+                            <div
+                                class="bg-[#0F172A] text-primary-200 h-10 flex justify-center items-center rounded-md ">
+                                fajer</div>
+                            <div class="bg-[#0F172A] text-primary-200 flex justify-center items-center rounded-md">04:59
+                            </div>
                         </div>
 
                     </div>
@@ -57,41 +102,75 @@
 
     </div>
 </template>
-<script >
+<script>
 
 import { defineComponent } from 'vue'
 import ReteRn from '../icons/ReteRn.vue'
 import { Carousel, Navigation, Slide } from 'vue3-carousel'
 import 'vue3-carousel/dist/carousel.css'
 import Times from '../components/Salat/TimE.vue'
-import SearCh from '../components/Salat/SearCh.vue'
+import axios from 'axios'
+import Dropdown from 'primevue/dropdown';
+
+import Botton from 'primevue/button';
+
+
 
 export default defineComponent({
     components: {
+        Botton,
         Carousel,
         Slide,
         Navigation,
         Times,
-        SearCh,
-        ReteRn
+        ReteRn,
+        Dropdown
     },
     data() {
         return {
-            showTime : false
-            
+            showTime: true,
+            Time: "",
+            dataLoaded: false,
+            date: new Date(),
+            selectedCountry: null,
+            countries: [
+                { name: 'Australia', code: 'AU' },
+                { name: 'Brazil', code: 'BR' },
+                { name: 'China', code: 'CN' },
+                { name: 'Egypt', code: 'EG' },
+                { name: 'France', code: 'FR' },
+                { name: 'Germany', code: 'DE' },
+                { name: 'India', code: 'IN' },
+                { name: 'Japan', code: 'JP' },
+                { name: 'Spain', code: 'ES' },
+                { name: 'United States', code: 'US' }
+            ]
+
+
         }
     },
     methods: {
-        show(){
+        show() {
             this.showTime = !this.showTime
         }
+    },
+    mounted() {
+        axios.get('http://api.aladhan.com/v1/timingsByCity?city=Dubai&country=United Arab Emirates&method=8')
+            .then(res => {
+                this.Time = res.data;
+                this.dataLoaded = true;
+                console.log(this.Time); // Set to true when data is ready
+            })
+            .catch(error => {
+                console.error('Failed to fetch data:', error);
+            });
     },
 })
 
 
 
 </script>
-<style>
+<style scoped>
 .carousel__slide {
     padding: 10px;
     width: 100px;
@@ -103,9 +182,8 @@ export default defineComponent({
 .carousel__prev,
 .carousel__next {
     box-sizing: content-box;
-    border: 2px solid #10B981;
+    border: 2px solid #0F172A;
     border-radius: 100%;
-
     color: white;
 
 
@@ -115,7 +193,6 @@ export default defineComponent({
     width: 700px;
     height: 100px;
     z-index: 0;
-    background-color: transparent;
     position: relative;
 }
 

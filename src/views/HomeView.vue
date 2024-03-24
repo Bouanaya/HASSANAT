@@ -2,7 +2,7 @@
 <template>
   <main class="grid grid-cols-2 h-screen pl-16  bg-[#0F172A] overflow-y-hidden">
     <div class="flex justify-center items-center">
-      <h1 class="text-primary-300 ">مرحبا يا مسلمين</h1>
+      <h1 class="text-primary-300 ">مرحبا يا مسلم</h1>
 
     </div>
 
