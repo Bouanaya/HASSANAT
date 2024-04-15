@@ -6,10 +6,4 @@
 
     </select>
 </template>
-<script setup>
  
- 
-
-
-
-</script>

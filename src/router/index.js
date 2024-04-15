@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
 import QuoranView from '@/views/QuoranView.vue'
-import SalatView from '@/views/SalatView.vue'
 import DoaaView from '@/views/DoaaView.vue'
 import SettingView from '@/views/SettingView.vue'
 import AyatView from '@/views/AyatView.vue'
@@ -22,11 +21,7 @@ const router = createRouter({
       // which is lazy-loaded when the route is visited.
       component:QuoranView
     },
-    {
-      path: '/Salat',
-      name: 'Salat',
-      component: SalatView
-    },
+ 
     {
       path: '/Doaa',
       name: 'Doaa',
@@ -39,12 +34,16 @@ const router = createRouter({
     },
     {
       path: '/Quoran/:id',
-      name: 'Ayat',
-      component: AyatView
+      name: ' AyatView',
+      component:AyatView
     },
 
     
   ],
+    scrollBehavior() {
+    // Scroll to the top when navigating to a new route
+    return { top: 0 };
+  },
   linkActiveClass: "isActive",
   linkExactActiveClass: "exact-active",
 })

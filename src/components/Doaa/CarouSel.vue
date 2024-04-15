@@ -1,12 +1,3 @@
- 
- 
-
-
- 
-
-
-
-
 <template>
     <Carousel>
         <Slide v-for="slide in Doa" :key="slide.count">
@@ -49,6 +40,12 @@ Doa: Doaa.Tasbih
 
  
  
+}
+.carousel__icon{
+    transition: .5s;
+}
+.carousel__icon:hover{
+    color: #10B981;
 }
 
 .carousel__prev,

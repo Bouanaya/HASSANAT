@@ -1,45 +1,109 @@
 <template>
-    <div class="pl-16 py-6 bg-[#0F172A] w-full h-full flex justify-center flex-col space-y-8 items-center">
-        <div
-            class="bg-primary-400 w-3/4 h-3/4 relative flex justify-center rounded-md shadow-primary-500/30 shadow-lg  ">
-            <div class="namesourat absolute -top-10 bg-primary-300 text-center px-6 py-2  rounded-md">
-                <h1 class="font-mono">سُورَةُ ٱلْفَاتِحَةِ</h1>
-                <h1>Al-Faatiha</h1>
+    <swiper :slides-per-view="1" :space-between="0" @swiper="onSwiper" @slideChange="onSlideChange"
+        :pagination="{ clickable: true }" :scrollbar="{ draggable: true }"
+        class="h-screen flex justify-center w-screen">
+        <swiper-slide class=" pl-16 py-6 bg-[#0F172A]  h-full flex justify-center flex-col space-y-8 items-center"
+            v-for="(aya, index) in ayat.ayahs" :key="index">
+
+
+            <div class="absolute left-28 top-8">
+                <router-link to="/Quoran">
+                    <Btn icon="pi pi-delete-left " label=" Exit" severity="danger" text  />
+
+
+                </router-link>
+            </div>
+
+            <div class="w-screen h-3/4 flex justify-center ">
+                <div class=" bg-primary-400 w-3/4  relative flex justify-center  rounded-md shadow-primary-500/30
+                shadow-lg ">
+
+                    <div class=" namesourat absolute -top-10 bg-primary-300 text-center px-6  py-2 rounded-md">
+                        <h1 class="font-mono">{{ ayat.name }}</h1>
+                        <h1>{{ ayat.englishName }}</h1>
+
+                    </div>
+
+                    <div class="ayat text-center flex justify-center items-center flex-col px-10 py-6 ">
+                        <p class="text-3xl leading-relaxed font-mono">{{ aya.text }} </p>
+                        <span
+                            class="text-2xl flex justify-center items-center border-[#0F172A] bg-[#6C63FF]   border rounded-full w-10 h-10">{{
+                            aya.numberInSurah }}</span>
+                    </div>
+                    <div
+                        class="page absolute -bottom-5 bg-primary-300  px-3 py-2  rounded-lg flex justify-center items-center">
+                        <h1>juz : {{ aya.juz }}</h1>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="w-full flex justify-center ">
+                <div class="audio bg-primary-400 rounded-md w-1/3 h-16 relative ml-16  ">
+                    <AudioPlayer :option="{
+            src: `${aya.audio}`,
+            coverImage: '../../public/quran .png',
+
+        }" />
+                </div>
+            </div>
+            <div class="w-screen pr-16  flex justify-between relative">
+                <Prev class="absolute bottom-20 left-32"></Prev>
+                <Next class="absolute bottom-20 right-16"></Next>
 
             </div>
-            <div class="ayat text-center flex justify-center items-center flex-col ">
-                <p class="text-5xl">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</p>
-            </div>
-            <div class="page absolute -bottom-5 bg-primary-300 p-3  rounded-lg flex justify-center items-center">
-                <h1>juz : 1</h1>
-            </div>
-
-        </div>
 
 
-        <div class="audio bg-primary-400 rounded-md w-1/2 h-16 relative ">
-            <AudioPlayer class="" :option="{
-                src: 'https://cdn.islamic.network/quran/audio/128/ar.alafasy/1.mp3',
-                coverImage: '../../public/quran .png',
-
-            }" />
-        </div>
+        </swiper-slide>
 
 
-    </div>
-
-
-
+    </swiper>
 
 </template>
 <script setup>
+ 
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import 'primeicons/primeicons.css'
+import Btn from 'primevue/button';
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
+import Next from '../components/Salat/Nex-t.vue'
+import Prev from '../components/Salat/pr-ev.vue'
+ 
+
+
+import { ref, onBeforeMount } from "vue";
+import 'primeicons/primeicons.css'
 import AudioPlayer from 'vue3-audio-player'
 import 'vue3-audio-player/dist/style.css'
+import { useRoute } from 'vue-router';
+import dataAyat from "../DB/Quoran.json"
+ 
+const route = useRoute()
+const { id } = route.params
+const ayat = ref(null)
+const onSwiper = (swiper) => {
+    console.log(swiper);
+};
+const onSlideChange = () => {
+    console.log('slide change');
+};
+ 
+ 
+onBeforeMount(() => {
+    ayat.value = dataAyat.data.surahs.find(c => c.englishName == id)
+})
+
+ 
 
 </script>
 
 
 <style>
+ 
 .audio__player-progress-container[data-v-370a6415] {
     position: absolute;
     top: 10px;
@@ -47,28 +111,126 @@ import 'vue3-audio-player/dist/style.css'
 }
 
 .audio__player-play img[data-v-370a6415] {
-    width: 50px;
-    height: 50px;
+    width: 30px;
+    height: 30px;
+     
+    
 
 }
 
 .audio__player-play[data-v-370a6415] {
     position: absolute;
     left: 0;
-    top: 10px;
+    top: 15px;
 
 }
 
 .audio__player-play-icon[data-v-370a6415] {
     position: absolute;
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     cursor: pointer;
-    left: 300px;
+    left: 195px;
     top: 30px;
-    background-color:#6EE7B7;
-    color: #0F172A;
-    opacity:100;
+    background-color:#6C63FF;
+    color:#6C63FF;
+    opacity: 100;
 
 }
+
+.jello-vertical {
+    -webkit-animation: jello-vertical 0.9s both;
+    animation: jello-vertical 0.9s both;
+}
+
+/* ----------------------------------------------
+ * Generated by Animista on 2024-4-8 21:50:43
+ * Licensed under FreeBSD License.
+ * See http://animista.net/license for more info. 
+ * w: http://animista.net, t: @cssanimista
+ * ---------------------------------------------- */
+
+/**
+ * ----------------------------------------
+ * animation jello-vertical
+ * ----------------------------------------
+ */
+@-webkit-keyframes jello-vertical {
+    0% {
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+    }
+
+    30% {
+        -webkit-transform: scale3d(0.75, 1.25, 1);
+        transform: scale3d(0.75, 1.25, 1);
+    }
+
+    40% {
+        -webkit-transform: scale3d(1.25, 0.75, 1);
+        transform: scale3d(1.25, 0.75, 1);
+    }
+
+    50% {
+        -webkit-transform: scale3d(0.85, 1.15, 1);
+        transform: scale3d(0.85, 1.15, 1);
+    }
+
+    65% {
+        -webkit-transform: scale3d(1.05, 0.95, 1);
+        transform: scale3d(1.05, 0.95, 1);
+    }
+
+    75% {
+        -webkit-transform: scale3d(0.95, 1.05, 1);
+        transform: scale3d(0.95, 1.05, 1);
+    }
+
+    100% {
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+    }
+}
+
+@keyframes jello-vertical {
+    0% {
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+    }
+
+    30% {
+        -webkit-transform: scale3d(0.75, 1.25, 1);
+        transform: scale3d(0.75, 1.25, 1);
+    }
+
+    40% {
+        -webkit-transform: scale3d(1.25, 0.75, 1);
+        transform: scale3d(1.25, 0.75, 1);
+    }
+
+    50% {
+        -webkit-transform: scale3d(0.85, 1.15, 1);
+        transform: scale3d(0.85, 1.15, 1);
+    }
+
+    65% {
+        -webkit-transform: scale3d(1.05, 0.95, 1);
+        transform: scale3d(1.05, 0.95, 1);
+    }
+
+    75% {
+        -webkit-transform: scale3d(0.95, 1.05, 1);
+        transform: scale3d(0.95, 1.05, 1);
+    }
+
+    100% {
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+    }
+}
+#app>div>div>div.relative.w-screen.h-screen>div:nth-child(7)>div.audio.bg-primary-400.rounded-md.w-1\/3.h-16.relative>div>div.audio__player-play-and-title>div>div>div>img{
+    width: 30px;
+    height: 30px;
+}
+
 </style>

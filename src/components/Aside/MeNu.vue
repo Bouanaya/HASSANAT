@@ -6,14 +6,11 @@
                     <BookIcon />
                 </BaseIcon>
             </router-link>
-            <router-link to="/Salat" v-slot="{ isActive }">
-
-                <BaseIcon :is-active="isActive">
-                    <SalatIcon />
-                </BaseIcon>
 
 
-            </router-link>
+
+
+
             <router-link to="/Doaa" v-slot="{ isActive }">
                 <BaseIcon :is-active="isActive">
                     <TasbihIcon />
@@ -27,13 +24,16 @@
             </button>
         </div>
         <div class="flex md:hidden bg-green-500 rounded-xl mb-2 w-1/2   m-auto" :class="{ Menu: !Menu }">
-            <div class=" rounded-md p-3 space-x-12 flex justify-center duration-1000">
+            <div class=" rounded-md p-2 space-x-12 flex justify-center duration-1000">
                 <router-link to="/Quoran">
                     <BookIcon />
                 </router-link>
                 <router-link to="/Salat">
                     <SalatIcon></SalatIcon>
 
+                </router-link>
+                <router-link to="/Doaa">
+                    <TasbihIcon />
                 </router-link>
                 <router-link to="/Doaa">
                     <TasbihIcon />
@@ -56,7 +56,7 @@
 }
 </style>
 <script setup>
-import SalatIcon from '@/icons/SalatIcon.vue'
+
 import TasbihIcon from '@/icons/TasbihIcon.vue';
 import BookIcon from '@/icons/BookIcon.vue'
 import MenuIcon from '@/icons/MenuIcon.vue'
