@@ -8,7 +8,7 @@
 
             <div class="absolute left-28 top-8">
                 <router-link to="/Quoran">
-                    <Btn icon="pi pi-delete-left " label=" Exit" severity="danger" text  />
+                    <Btn icon="pi pi-delete-left " label=" Exit" severity="danger" text />
 
 
                 </router-link>
@@ -28,7 +28,7 @@
                         <p class="text-3xl leading-relaxed font-mono">{{ aya.text }} </p>
                         <span
                             class="text-2xl flex justify-center items-center border-[#0F172A] bg-[#6C63FF]   border rounded-full w-10 h-10">{{
-                            aya.numberInSurah }}</span>
+                                aya.numberInSurah }}</span>
                     </div>
                     <div
                         class="page absolute -bottom-5 bg-primary-300  px-3 py-2  rounded-lg flex justify-center items-center">
@@ -42,10 +42,10 @@
             <div class="w-full flex justify-center ">
                 <div class="audio bg-primary-400 rounded-md w-1/3 h-16 relative ml-16  ">
                     <AudioPlayer :option="{
-            src: `${aya.audio}`,
-            coverImage: '../../public/quran .png',
+                        src: `${aya.audio}`,
+                        coverImage: '../../public/quran .png',
 
-        }" />
+                    }" />
                 </div>
             </div>
             <div class="w-screen pr-16  flex justify-between relative">
@@ -62,7 +62,7 @@
 
 </template>
 <script setup>
- 
+
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'primeicons/primeicons.css'
 import Btn from 'primevue/button';
@@ -72,7 +72,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import Next from '../components/Salat/Nex-t.vue'
 import Prev from '../components/Salat/pr-ev.vue'
- 
+
 
 
 import { ref, onBeforeMount } from "vue";
@@ -81,7 +81,6 @@ import AudioPlayer from 'vue3-audio-player'
 import 'vue3-audio-player/dist/style.css'
 import { useRoute } from 'vue-router';
 import dataAyat from "../DB/Quoran.json"
- 
 const route = useRoute()
 const { id } = route.params
 const ayat = ref(null)
@@ -91,19 +90,18 @@ const onSwiper = (swiper) => {
 const onSlideChange = () => {
     console.log('slide change');
 };
- 
- 
+
+
 onBeforeMount(() => {
     ayat.value = dataAyat.data.surahs.find(c => c.englishName == id)
 })
 
- 
+
 
 </script>
 
 
 <style>
- 
 .audio__player-progress-container[data-v-370a6415] {
     position: absolute;
     top: 10px;
@@ -113,8 +111,8 @@ onBeforeMount(() => {
 .audio__player-play img[data-v-370a6415] {
     width: 30px;
     height: 30px;
-     
-    
+
+
 
 }
 
@@ -132,8 +130,8 @@ onBeforeMount(() => {
     cursor: pointer;
     left: 195px;
     top: 30px;
-    background-color:#6C63FF;
-    color:#6C63FF;
+    background-color: #6C63FF;
+    color: #6C63FF;
     opacity: 100;
 
 }
@@ -228,9 +226,9 @@ onBeforeMount(() => {
         transform: scale3d(1, 1, 1);
     }
 }
-#app>div>div>div.relative.w-screen.h-screen>div:nth-child(7)>div.audio.bg-primary-400.rounded-md.w-1\/3.h-16.relative>div>div.audio__player-play-and-title>div>div>div>img{
+
+#app>div>div>div.relative.w-screen.h-screen>div:nth-child(7)>div.audio.bg-primary-400.rounded-md.w-1\/3.h-16.relative>div>div.audio__player-play-and-title>div>div>div>img {
     width: 30px;
     height: 30px;
 }
-
 </style>

@@ -1,5 +1,5 @@
 <template>
-    <i class="pi pi-phone text-2xl">
+    <i class="pi pi-phone text-xl">
     </i>
 
 </template>

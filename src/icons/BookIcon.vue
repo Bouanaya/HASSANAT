@@ -1,4 +1,4 @@
 <template>
-    <img src="../../public/quran .png" alt="">
+    <img src="../../public/quran .png" alt="" class="">
 
 </template>

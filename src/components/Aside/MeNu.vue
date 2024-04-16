@@ -44,16 +44,6 @@
     </div>
 </template>
 <style scoped>
-.Menu {
-    position: absolute;
-    bottom: -400px;
-    transition: all .8s;
-
-
-
-
-
-}
 </style>
 <script setup>
 
