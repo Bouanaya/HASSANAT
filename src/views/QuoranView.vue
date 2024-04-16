@@ -63,7 +63,7 @@ watch(data, () => {
 
 
 onMounted(() => {
-  axios.get('http://api.alquran.cloud/v1/quran/ar.alafasy')
+  axios.get('https://api.alquran.cloud/v1/quran/ar.alafasy')
     .then(res => {
       
       Qur.value = res.data.data.surahs;
