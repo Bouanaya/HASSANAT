@@ -1,7 +1,7 @@
 <template>
     <swiper :slides-per-view="1" :space-between="0" @swiper="onSwiper" @slideChange="onSlideChange"
         :pagination="{ clickable: true }" :scrollbar="{ draggable: true }"
-        class="h-screen flex justify-center w-screen">
+        class="h-screen flex justify-center w-screen  ">
         <swiper-slide class=" pl-16 py-6 bg-[#0F172A]  h-full flex justify-center flex-col space-y-8 items-center"
             v-for="(aya, index) in ayat.ayahs" :key="index">
 
@@ -19,16 +19,16 @@
                 shadow-lg ">
 
                     <div class=" namesourat absolute -top-10 bg-primary-300 text-center px-6  py-2 rounded-md">
-                        <h1 class="font-mono">{{ ayat.name }}</h1>
-                        <h1>{{ ayat.englishName }}</h1>
+                        <h1 class="font-othmani ">{{ ayat.name }}</h1>
+                        <h1 class="mt-2">{{ ayat.englishName }}</h1>
 
                     </div>
 
                     <div class="ayat text-center flex justify-center items-center flex-col px-10 py-6 ">
-                        <p class="text-3xl leading-relaxed font-mono">{{ aya.text }} </p>
+                        <p class="text-3xl leading-loose font-othmani ">{{ aya.text }} </p>
                         <span
-                            class="text-2xl flex justify-center items-center border-[#0F172A] bg-[#6C63FF]   border rounded-full w-10 h-10">{{
-                                aya.numberInSurah }}</span>
+                            class="text-2xl flex justify-center items-center border-[#0F172A] bg-[#6C63FF] mt-4  border rounded-full w-10 h-10">{{
+                            aya.numberInSurah }}</span>
                     </div>
                     <div
                         class="page absolute -bottom-5 bg-primary-300  px-3 py-2  rounded-lg flex justify-center items-center">
@@ -102,6 +102,10 @@ onBeforeMount(() => {
 
 
 <style>
+ @font-face {
+     font-family: 'Othmani';
+     src: url('/public/fonts/ArbFONTS-Amiri-Quran.ttf') format('truetype');
+ }
 .audio__player-progress-container[data-v-370a6415] {
     position: absolute;
     top: 10px;
@@ -134,6 +138,10 @@ onBeforeMount(() => {
     color: #6C63FF;
     opacity: 100;
 
+}
+.font-othmani {
+    font-family: 'Othmani'sans-serif;
+    
 }
 
 .jello-vertical {

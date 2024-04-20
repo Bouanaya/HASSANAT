@@ -5,7 +5,7 @@
 
         <span class="absolute  z-50 top-6 ">
           <i class="pi pi-search absolute top-2/4 -mt-2 left-3 text-surface-400 dark:text-surface-600" />
-          <InputText v-model.trim()="data"  placeholder="Search" class="pl-10 bg-primary-50" />
+          <InputText v-model.trim()="data" placeholder="Search" class="pl-10 bg-primary-50" />
         </span>
 
 
@@ -16,8 +16,8 @@
       <div class="md:pl-24 px-10 md:flex flex-wrap grid grid-cols-2  gap-8 py-24" v-if="dataLoaded">
         <RouterLink :to='`/Quoran/${item.englishName}`' v-for="item in quran " :key="item" class="duration-500   relative md:w-48 hover:bg-primary-300 hover:shadow-lg hover:shadow-primary-500/30 
        h-20 bg-primary-100  rounded-md flex justify-center flex-col items-center ">
-          <h1 class="font-mono">{{ item.name }}</h1>
-          <h1>{{ item.englishName }}</h1>
+          <h1 class="font-othmani">{{ item.name }}</h1>
+          <h1 class="mt-2">{{ item.englishName }}</h1>
           <span class="absolute  -top-5  bg-primary-100 rounded-full w-8 h-8 p-2 flex justify-center items-center">{{
             item.number }}</span>
         </RouterLink>

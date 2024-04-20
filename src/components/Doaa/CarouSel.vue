@@ -2,7 +2,7 @@
     <Carousel>
         <Slide v-for="slide in Doa" :key="slide.count">
             <div class="mx-4 p-4 absolute w-3/4 ">
-                <h1 class="text-primary-400 text-center cursor-pointer text-2xl  ">{{ slide.content}}</h1>
+                <h1 class="text-primary-400 text-center cursor-pointer text-2xl font-othmani  ">{{ slide.content}}</h1>
             </div>
         </Slide>
 

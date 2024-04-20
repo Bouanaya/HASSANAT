@@ -2,7 +2,7 @@
     <div class="flex justify-center items-center h-full bg-[#0F172A] gap-20">
         <h1 class="text-5xl bg-gradient-to-r from-[#6C63FF] via-green-400 to-emerald-500
                         bg-clip-text text-transparent font-sans font-bold">Contact Me</h1>
-        <div class=" border border-emerald-700 rounded-lg p-4">
+        <div class=" border border-[#6C63FF] rounded-lg p-4">
             <form action="" ref="form" @submit.prevent="sendEmail">
                 <div class="flex flex-col gap-8">
                     <div class="flex space-x-4">
@@ -32,7 +32,8 @@
                     </span>
                     <span>
                         <Toast />
-                        <Buttons icon="pi pi-arrow-right" label="Send" type="submit" severity="success" />
+                        <Buttons icon="pi pi-arrow-right" label="Send" type="submit"  
+                            class="bg-[#6C63FF]" />
                     </span>
 
                 </div>

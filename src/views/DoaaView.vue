@@ -14,7 +14,7 @@
 
 
             <div class="flex justify-center">
-                <h1 class="text-primary-300 text-7xl">{{ tas }}</h1>
+                <h1 class="text-primary-300 text-7xl ">{{ tas }}</h1>
             </div>
 
             <div class="flex justify-center ">
